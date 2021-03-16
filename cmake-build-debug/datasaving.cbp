@@ -82,6 +82,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/liu/Desktop/Stages/cpp/datasaving/contextanddevice/devicemanager.cpp">
+			<Option target="datasaving"/>
+		</Unit>
+		<Unit filename="/home/liu/Desktop/Stages/cpp/datasaving/contextanddevice/devicemanager.h">
+			<Option target="datasaving"/>
+		</Unit>
 		<Unit filename="/home/liu/Desktop/Stages/cpp/datasaving/main.cpp">
 			<Option target="datasaving"/>
 		</Unit>

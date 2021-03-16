@@ -94,12 +94,12 @@ clean: CMakeFiles/datasaving.dir/clean
 CMakeFiles/datasaving.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/datasaving.dir/build.make CMakeFiles/datasaving.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/datasaving.dir/build.make CMakeFiles/datasaving.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/liu/Desktop/Stages/cpp/datasaving/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target datasaving"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/liu/Desktop/Stages/cpp/datasaving/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4 "Built target datasaving"
 .PHONY : CMakeFiles/datasaving.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/datasaving.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/liu/Desktop/Stages/cpp/datasaving/cmake-build-debug/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/liu/Desktop/Stages/cpp/datasaving/cmake-build-debug/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/datasaving.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/liu/Desktop/Stages/cpp/datasaving/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/datasaving.dir/rule

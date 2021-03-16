@@ -8,7 +8,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 find_package(realsense2 REQUIRED) #added
 
-add_executable(datasaving main.cpp ply/saving.cpp ply/saving.h)
+add_executable(datasaving main.cpp ply/saving.cpp ply/saving.h contextanddevice/devicemanager.cpp contextanddevice/devicemanager.h)
 
 target_link_libraries(datasaving ${realsense2_LIBRARY}) #added
 

@@ -143,6 +143,33 @@ datasaving/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/datasaving.dir/build.make CMakeFiles/datasaving.dir/build
 .PHONY : datasaving/fast
 
+contextanddevice/devicemanager.o: contextanddevice/devicemanager.cpp.o
+
+.PHONY : contextanddevice/devicemanager.o
+
+# target to build an object file
+contextanddevice/devicemanager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/datasaving.dir/build.make CMakeFiles/datasaving.dir/contextanddevice/devicemanager.cpp.o
+.PHONY : contextanddevice/devicemanager.cpp.o
+
+contextanddevice/devicemanager.i: contextanddevice/devicemanager.cpp.i
+
+.PHONY : contextanddevice/devicemanager.i
+
+# target to preprocess a source file
+contextanddevice/devicemanager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/datasaving.dir/build.make CMakeFiles/datasaving.dir/contextanddevice/devicemanager.cpp.i
+.PHONY : contextanddevice/devicemanager.cpp.i
+
+contextanddevice/devicemanager.s: contextanddevice/devicemanager.cpp.s
+
+.PHONY : contextanddevice/devicemanager.s
+
+# target to generate assembly for a file
+contextanddevice/devicemanager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/datasaving.dir/build.make CMakeFiles/datasaving.dir/contextanddevice/devicemanager.cpp.s
+.PHONY : contextanddevice/devicemanager.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -206,6 +233,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... datasaving"
+	@echo "... contextanddevice/devicemanager.o"
+	@echo "... contextanddevice/devicemanager.i"
+	@echo "... contextanddevice/devicemanager.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

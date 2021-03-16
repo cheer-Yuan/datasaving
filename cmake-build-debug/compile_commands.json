@@ -8,5 +8,10 @@
   "directory": "/home/liu/Desktop/Stages/cpp/datasaving/cmake-build-debug",
   "command": "/usr/bin/c++    -g   -std=gnu++14 -o CMakeFiles/datasaving.dir/ply/saving.cpp.o -c /home/liu/Desktop/Stages/cpp/datasaving/ply/saving.cpp",
   "file": "/home/liu/Desktop/Stages/cpp/datasaving/ply/saving.cpp"
+},
+{
+  "directory": "/home/liu/Desktop/Stages/cpp/datasaving/cmake-build-debug",
+  "command": "/usr/bin/c++    -g   -std=gnu++14 -o CMakeFiles/datasaving.dir/contextanddevice/devicemanager.cpp.o -c /home/liu/Desktop/Stages/cpp/datasaving/contextanddevice/devicemanager.cpp",
+  "file": "/home/liu/Desktop/Stages/cpp/datasaving/contextanddevice/devicemanager.cpp"
 }
 ]

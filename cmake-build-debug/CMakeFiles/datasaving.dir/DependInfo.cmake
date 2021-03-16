@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/liu/Desktop/Stages/cpp/datasaving/contextanddevice/devicemanager.cpp" "/home/liu/Desktop/Stages/cpp/datasaving/cmake-build-debug/CMakeFiles/datasaving.dir/contextanddevice/devicemanager.cpp.o"
   "/home/liu/Desktop/Stages/cpp/datasaving/main.cpp" "/home/liu/Desktop/Stages/cpp/datasaving/cmake-build-debug/CMakeFiles/datasaving.dir/main.cpp.o"
   "/home/liu/Desktop/Stages/cpp/datasaving/ply/saving.cpp" "/home/liu/Desktop/Stages/cpp/datasaving/cmake-build-debug/CMakeFiles/datasaving.dir/ply/saving.cpp.o"
   )
