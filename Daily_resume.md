@@ -6,6 +6,9 @@ How to deal with the .bag file
 Compression algorithm of the .ply, or ply to other format
 # Resumes
 
+##17/03/2021
+Paper reading CCRSSEA, general knowledge of P/NP taxonomy and halting problem
+
 ##15/03/2021, 16/03/2021
 Functions implemented : Saving one frame / a video of a given period of time, using C++ and the realsense2API
 Studied : Basic notions of dotcloud
