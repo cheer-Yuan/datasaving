@@ -6,6 +6,9 @@ How to deal with the .bag file
 Compression algorithm of the .ply, or ply to other format
 # Resumes
 
+##18/03/2021
+GO IN ACTION learning chapter3, 4, 5
+
 ##17/03/2021
 Paper reading CCRSSEA, general knowledge of P/NP taxonomy and halting problem
 
