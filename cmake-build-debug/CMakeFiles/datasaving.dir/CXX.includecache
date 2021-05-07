@@ -6,11 +6,39 @@
 
 #IncludeRegexTransform: 
 
-/home/liu/Desktop/Stages/cpp/datasaving/ply/saving.cpp
-saving.h
-/home/liu/Desktop/Stages/cpp/datasaving/ply/saving.h
+../programoptions/include/configuration.hpp
 
-/home/liu/Desktop/Stages/cpp/datasaving/ply/saving.h
+../programoptions/include/programoptionsconfig.hpp
+configuration.hpp
+../programoptions/include/configuration.hpp
+boost/program_options.hpp
+-
+
+../third-party/stb_image_write.h
+stdlib.h
+-
+stdio.h
+-
+stdarg.h
+-
+stdlib.h
+-
+string.h
+-
+math.h
+-
+assert.h
+-
+
+/home/liu/Desktop/Stages/gogs/datasaving/ply/saving.cpp
+saving.h
+/home/liu/Desktop/Stages/gogs/datasaving/ply/saving.h
+stb_image_write.h
+/home/liu/Desktop/Stages/gogs/datasaving/ply/stb_image_write.h
+sys/time.h
+-
+
+/home/liu/Desktop/Stages/gogs/datasaving/ply/saving.h
 librealsense2/rs.hpp
 -
 fstream
@@ -20,5 +48,9 @@ iostream
 sstream
 -
 unistd.h
+-
+configuration.hpp
+/home/liu/Desktop/Stages/gogs/datasaving/ply/configuration.hpp
+programoptionsconfig.hpp
 -
 

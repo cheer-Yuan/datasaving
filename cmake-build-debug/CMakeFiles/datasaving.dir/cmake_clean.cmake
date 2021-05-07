@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/datasaving.dir/contextanddevice/devicemanager.cpp.o"
   "CMakeFiles/datasaving.dir/main.cpp.o"
   "CMakeFiles/datasaving.dir/ply/saving.cpp.o"
+  "CMakeFiles/datasaving.dir/programoptions/src/programoptionsconfig.cpp.o"
   "datasaving"
   "datasaving.pdb"
 )
