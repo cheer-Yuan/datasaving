@@ -4,18 +4,90 @@ This is a primitive version of recording intel LiDAR data to local, using realse
 
 Reference : https://github.com/IntelRealSense/librealsense/tree/master/examples
 
-# Examples for parameters
+## Examples for parameters
 
-## To record 3 groups of data, one every 10 seconds, record all files including point cloud .ply, together with the rgb, depth and infrared photos):
+### To record 3 groups of data, one every 10 seconds, record all files including point cloud .ply, together with the rgb, depth and infrared photos):
 
-./datasaving -n 3 -i 10 
+./datasaving -dir ./output/ -n 3 -i 10 
 
-## To record in infinite mode, recording JUST the PLY file : (record a group of data every 5 seconds until a manuel exit):
+### To record in infinite mode, no waiting time between 2 records, using the resolution of 424\*240, and recording JUST the PLY files
 
-./datasaving -n 5 -i -1 -f 0 -r 0 -d 0
+./datasaving -dir ./output/ -n -1 -i 0 -f 0 -r 0 -d 0 -l 5
 
+## All parameters 
+
+### -dir 
+
+-dir ./output/ : In which folder to save the output files
+
+### -n
+
+Any integer > 0 : Set the total number of files to save
+
+(default) -1 : Set the total number of files to save to infinite
+
+### -i
+
+Any integer > 0 : Make a record every i seconds
+
+(default) 0 : Start immediately the next record as long as the previous end
+
+### -r 
+
+1 : Save the normal RGB photo 
+
+(default) 0 : Do not save the normal RGB photo
+
+### -d
+
+1 : Save the depth RGB photo
+
+(default) 0 : Do not save the depth RGB photo
+
+### -f
+
+1 : Save the infrared photo
+
+(default) 0 : Do not save the infrared photo
+
+### -p
+
+(default) 1 : Save the .ply point cloud file 
+
+0 : Do not save the infrared photo
+
+### -c
+
+1 : Keep the texture information in the .ply file
+
+(default) 0 : Remove the texture information in the .ply file (faster and smaller)
+
+### -l
+
+(default) 0 : Choose the standard resolution for the depth information 
+
+1 : Use the lowest resolution for depth information of 320 * 240, on L515
+
+5 : Use the lowest resolution for depth information of 424 * 240, on D455
+
+## Reinstall the INTEL realsense library :
+
+Navigate to librealsense root directory
+
+```sh
+mkdir build && cd build
+```
+
+```sh
+cmake ../ -DCMAKE_BUILD_TYPE=Release
+```
+
+```sh
+sudo make uninstall && make clean && make && sudo make install
+```
 
 ## Usage
+
 ```sh
 $ cmake .
 ```
@@ -36,32 +108,26 @@ $ chmod 777 monitorProcess.sh
 ./monitorProcess.sh
 ```
 
-## Parameters 
+### Version 1.5
 
--n : Numbers of datas to record, default value = 1, use -1 to launch an endless record
+Now support the lowerd resolution 424\*240 (FOR D455) for the point cloud files, which saves more time. 
 
--i : Time period in which we make one record, default value = 10
+A brief benchmark on the resolution 424\*240 and .ply files only, platform : LINUX 5.4.0, cpu: Intel(R) Core(TM) i5-1035G7 CPU @ 1.20GHz, stockage NVME SSD
 
--p : Use 1 to record the point cloud .ply file and 0 to skip it, default value = 1
+Saving bandwidth :  24.3Mb / s , which is about 7 .ply files per second.
 
--r : Use 1 to record the real rgb photo and 0 to skip it, default value = 1
-
--d : Use 1 to record the photo colored by the depth and 0 to skip it, default value = 1
-
--f : Use 1 to record the infrared photo and 0 to skip it, default value = 1
-
-## Version 1.4
+### Version 1.4
 
 Now support the fast saving mode : save the .ply files without colors will be faster
 
-## Version 1.3
+### Version 1.3
 
 Time interval is more accurate now : it calculates the time to halt according to the time spent on the las record
 
 All designed parameters are now supported, choose any type of data to be recorded
 
 Continuous record time is shortened to 2 seconds / entire group of data  
-## Version 1.2
+### Version 1.2
 
 monitorProcess.sh : a bash program which overlooks the process of datasaving and restarts it when face a crash (Linux)
 
@@ -71,19 +137,19 @@ time for saving 1 group of data : 6 - 7 seconds
 
 the line of code which makes the program wait for 30 frames is now deleted, but almost no influence on the time a
 
-## Version 1.1 :
+### Version 1.1 :
 
 Parameters' Values :
 -n : Any value, use -1 to lance an infinite loop.
 -i : > 10, according to the cpu and stockage
-## Version 1.0 :
+### Version 1.0 :
 
 Specify the parameters :
 -n : total number of picture groups
 -i : interval between 2 groups
-## Version 0.1 :
+### Version 0.1 :
 
 Saving a videoclip under the .bag format
-## Version 0.0 : 
+### Version 0.0 : 
 
 Saving a dotcloud to a .ply file.

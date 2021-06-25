@@ -1,6 +1,0 @@
-/home/liu/Desktop/Stages/gogs/datasaving/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/liu/Desktop/Stages/gogs/datasaving/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/liu/Desktop/Stages/gogs/datasaving/cmake-build-debug/CMakeFiles/datasaving.dir
-/home/liu/Desktop/Stages/gogs/datasaving/cmake-build-debug/programoptions/CMakeFiles/rebuild_cache.dir
-/home/liu/Desktop/Stages/gogs/datasaving/cmake-build-debug/programoptions/CMakeFiles/edit_cache.dir
-/home/liu/Desktop/Stages/gogs/datasaving/cmake-build-debug/programoptions/CMakeFiles/programoptions.dir

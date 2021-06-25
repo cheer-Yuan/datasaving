@@ -59,10 +59,7 @@ void metadataToCsv(const rs2::frame& frm, const std::string& filename){
 
 /* saveKernel Saves one group od data to the disk
  */
-void saveKernel(const rs2::colorizer& color_map, const rs2::pipeline& pipe, int ifPly, int ifDepth, int ifColor, int ifInfr, int ifColor){
-//    time_t t = time(0);
-//    char tmp[32];
-//    strftime(tmp, sizeof(tmp), "%Y-%m-%d-%H:%M:%S-",localtime(&t));
+void saveKernel(const rs2::colorizer& color_map, const rs2::pipeline& pipe, int ifPly, int ifDepth, int ifImages, int ifInfr, int ifColor, const std::string& direction){
     std::string currenttime = GetLocalTimeWithMs();
 
     // Wait until a new set of frames become available
@@ -75,19 +72,31 @@ void saveKernel(const rs2::colorizer& color_map, const rs2::pipeline& pipe, int 
         auto color = frames.get_color_frame();
 
         rs2::pointcloud pc;
-        // Map the point cloud to the given color frame
-        pc.map_to(color);
-        // Generate the pointcloud and texture mappings of depth map.
-        rs2::points points = pc.calculate(depth);
 
-        // Export the point cloud to a PLY file with or without colors
+        // Generate the name of the file
         std::stringstream ply_file;
-        ply_file << "../output/" << currenttime << "Points.ply";
-        if (ifColor == 1) {
-            points.export_to_ply(ply_file.str(), color);
+        ply_file << direction << currenttime << "Points.ply";
 
+        if (ifColor == 1) {
+            // Map the point cloud to the given color frame
+            pc.map_to(color);
+
+            // Generate the point cloud
+            rs2::points points = pc.calculate(depth);
+            // Export the point cloud to a PLY file with colors
+            points.export_to_ply(ply_file.str(), color);
+        } else if (ifColor == 0) {
+            // Generate the point cloud
+            rs2::points points = pc.calculate(depth);
+            // Export the point cloud to a PLY file without colors
+            points.export_to_ply_notexture(ply_file.str());
+        } else if (ifColor == -1) {
+            // Generate the point cloud
+            rs2::points points = pc.calculate(depth);
+            // Export the point cloud to a PLY file with the pipe mode
+            points.export_to_ply_notexture(ply_file.str());
         }
-        points.export_to_ply_notexture(ply_file.str());
+
         std::cout << "Saved " << ply_file.str() << std::endl;
     }
 
@@ -105,13 +114,13 @@ void saveKernel(const rs2::colorizer& color_map, const rs2::pipeline& pipe, int 
 
             if (vf.get_profile().stream_name() == "Depth") {
                 if (ifDepth) {
-                    png_file << "../output/" << currenttime << vf.get_profile().stream_name() << ".png";
+                    png_file << direction << currenttime << vf.get_profile().stream_name() << ".png";
                     stbi_write_png(png_file.str().c_str(), vf.get_width(), vf.get_height(), vf.get_bytes_per_pixel(), vf.get_data(), vf.get_stride_in_bytes());
                     std::cout << "Saved " << png_file.str() << std::endl;
 
                     // record the metadata
                     std::stringstream csv_file;
-                    csv_file << "../output/" << currenttime << vf.get_profile().stream_name()
+                    csv_file << direction << currenttime << vf.get_profile().stream_name()
                              << "-metadata.csv";
                     metadataToCsv(vf, csv_file.str());
                 }
@@ -119,27 +128,27 @@ void saveKernel(const rs2::colorizer& color_map, const rs2::pipeline& pipe, int 
 
             if (vf.get_profile().stream_name() == "Infrared") {
                 if (ifInfr) {
-                    png_file << "../output/" << currenttime << vf.get_profile().stream_name() << ".png";
+                    png_file << direction << currenttime << vf.get_profile().stream_name() << ".png";
                     stbi_write_png(png_file.str().c_str(), vf.get_width(), vf.get_height(), vf.get_bytes_per_pixel(), vf.get_data(), vf.get_stride_in_bytes());
                     std::cout << "Saved " << png_file.str() << std::endl;
 
                     // record the metadata
                     std::stringstream csv_file;
-                    csv_file << "../output/" << currenttime << vf.get_profile().stream_name()
+                    csv_file << direction << currenttime << vf.get_profile().stream_name()
                              << "-metadata.csv";
                     metadataToCsv(vf, csv_file.str());
                 }
             }
 
             if (vf.get_profile().stream_name() == "Color") {
-                if (ifColor) {
-                    png_file << "../output/" << currenttime << vf.get_profile().stream_name() << ".png";
+                if (ifImages) {
+                    png_file << direction << currenttime << vf.get_profile().stream_name() << ".png";
                     stbi_write_png(png_file.str().c_str(), vf.get_width(), vf.get_height(), vf.get_bytes_per_pixel(), vf.get_data(), vf.get_stride_in_bytes());
                     std::cout << "Saved " << png_file.str() << std::endl;
 
                     // record the metadata
                     std::stringstream csv_file;
-                    csv_file << "../output/" << currenttime << vf.get_profile().stream_name()
+                    csv_file << direction << currenttime << vf.get_profile().stream_name()
                              << "-metadata.csv";
                     metadataToCsv(vf, csv_file.str());
                 }
@@ -156,7 +165,23 @@ void saveOneFrame(const BoostConfig& config){
 
     // Start streaming with default recommended configuration
     rs2::pipeline pipe;
-    pipe.start();
+
+    rs2::config cfg;
+    if (config.if_lowres() == 0) {
+        cfg.enable_stream(RS2_STREAM_DEPTH, 640, 480, RS2_FORMAT_ANY, 0);
+    } else if (config.if_lowres() == 5) {
+        cfg.enable_stream(RS2_STREAM_DEPTH, 424, 240, RS2_FORMAT_ANY, 0);
+    } else {
+        cfg.enable_stream(RS2_STREAM_DEPTH, 320, 240, RS2_FORMAT_ANY, 0);
+    }
+    if (config.if_rgb() == 1) {
+        cfg.enable_stream(RS2_STREAM_COLOR, 0, 0, RS2_FORMAT_ANY, 0);
+    }
+    if (config.if_infrarouge() == 1) {
+        cfg.enable_stream(RS2_STREAM_INFRARED, 0, 0, RS2_FORMAT_ANY, 0);
+    }
+
+    pipe.start(cfg);
 
     // save the parameters to a txt.file
     std::ofstream parameterFile;
@@ -170,9 +195,9 @@ void saveOneFrame(const BoostConfig& config){
     rs2::colorizer color_map;
 
     // if the parameter = -1, enter the infinite loop mode
-    if (config.give_photos() == -1)
-        saveInfiniteFrames(color_map, pipe, config.give_interval(), config.if_ply(), config.if_depth(), config.if_rgb(),
-                           config.if_infrarouge(), t1);
+    if (config.give_photos() == -1) saveInfiniteFrames(color_map, pipe, config.give_interval(), config.if_ply(), config.if_depth(), config.if_rgb(), config.if_infrarouge(),config.if_color(), t1, config.give_direction());
+
+
 
     // Iterate on the total number of images to be saved
     for (int i = 0; i < config.give_photos(); ++i) {
@@ -181,7 +206,7 @@ void saveOneFrame(const BoostConfig& config){
             gettimeofday(&t1,NULL);
         }
 
-        saveKernel(color_map, pipe, config.if_ply(), config.if_depth(), config.if_rgb(), config.if_infrarouge());
+        saveKernel(color_map, pipe, config.if_ply(), config.if_depth(), config.if_rgb(), config.if_infrarouge(), config.if_color(), config.give_direction());
 
         // save the counter in a file
         parameterFile.open("parameters.txt", std::ios::out | std::ios::app);
@@ -199,7 +224,7 @@ void saveOneFrame(const BoostConfig& config){
     }
 }
 
-void saveInfiniteFrames(rs2::colorizer color_map, rs2::pipeline pipe, int interv, int ifPly, int ifDepth, int ifColor, int ifInfr, struct timeval t1){
+void saveInfiniteFrames(const rs2::colorizer& color_map, const rs2::pipeline& pipe, int interv, int ifPly, int ifDepth, int ifImages, int ifInfr, int ifColor,  struct timeval t1, const std::string& direction){
     // count the number of data saved
     int counter = 0;
 
@@ -221,7 +246,7 @@ void saveInfiniteFrames(rs2::colorizer color_map, rs2::pipeline pipe, int interv
         }
         parameterFile.close();
 
-        saveKernel(color_map, pipe, ifPly, ifDepth, ifColor, ifInfr);
+        saveKernel(color_map, pipe, ifPly, ifDepth, ifImages, ifInfr, ifColor, direction);
 
         counter += 1;
 
