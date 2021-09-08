@@ -10,8 +10,6 @@
 class BoostConfig:
         public Configuration
 {
-    std::string dir;
-
     // the number of photos to take
     int nb;
 
@@ -42,8 +40,6 @@ public:
      * @param argv the values of command-line arguments
      */
     BoostConfig(const int argc, const char* const argv[]);
-
-    std::string give_direction() const override { return dir; }
 
     // see overridden function
     int give_photos() const override { return nb; }

@@ -11,12 +11,7 @@ class Configuration
 public:
 	// The destructor
 	virtual ~Configuration() = default;
-
-    /** Access the number of photos to take
- * @return the number of photos to take
- */
-    virtual std::string give_direction() const = 0;
-
+	
 	/** Access the number of photos to take
 	 * @return the number of photos to take
 	 */
